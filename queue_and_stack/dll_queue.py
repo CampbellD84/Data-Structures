@@ -14,9 +14,15 @@ class Queue:
         self.size += 1
 
     def dequeue(self):
+        # if size of queue is greater than zero
         if self.size > 0:
-            self.storage.remove_from_head()
+            # store method call in variable
+            dequed_node = self.storage.remove_from_head()
+            # decrement size
             self.size -= 1
+            return dequed_node
+        else:
+            return None
 
     def len(self):
         return self.size
