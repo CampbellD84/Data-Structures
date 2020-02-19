@@ -37,19 +37,44 @@ class BinarySearchTree:
     # False if it does not
     def contains(self, target):
         # Base Cases:
-        # 1) target found OR we hit None
+        # 1) target found
+        if self.value == target:
+            return True
 
-        # 2) Recursive case
-        # go down left or right subtree
-        pass
+        contained_in_subtree = False
+        # if target is less than current val, move left in BST
+        if target < self.value:
+            # if target != left, False
+            if not self.left:
+                return False
+            else:
+                contained_in_subtree = self.left.contains(target)
+        # else target is greater than current val, move right in BST
+        else:
+            # if target != right, False
+            if not self.right:
+                return False
+            else:
+                contained_in_subtree = self.right.contains(target)
+
+        return contained_in_subtree
 
     # Return the maximum value found in the tree
+
     def get_max(self):
         # right as far as you can go
-        pass
+        if not self:
+            return None
+
+        current_val = self
+        while current_val.right:
+            current_val = current_val.right
+
+        return current_val.value
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
+
     def for_each(self, cb):
         # 1) Base case:
         # Left = None and Right = None
