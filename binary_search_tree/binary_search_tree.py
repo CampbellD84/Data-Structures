@@ -65,9 +65,11 @@ class BinarySearchTree:
         # right as far as you can go
         if not self:
             return None
-
+        # set current node to self
         current_val = self
+        # iterate through right nodes
         while current_val.right:
+            # set current value to current right node value
             current_val = current_val.right
 
         return current_val.value
@@ -77,16 +79,21 @@ class BinarySearchTree:
 
     def for_each(self, cb):
         # 1) Base case:
-        # Left = None and Right = None
+        cb(self.value)
 
-        # 2) Recursive case:
-        # go left AND right
-        pass
+        # left side recursive
+        if self.left:
+            self.left.for_each(cb)
+
+        # right side recursive
+        if self.right:
+            self.right.for_each(cb)
 
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+
     def in_order_print(self, node):
         pass
 
