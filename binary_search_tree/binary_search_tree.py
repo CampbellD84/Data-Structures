@@ -1,7 +1,7 @@
 from dll_stack import Stack
 from dll_queue import Queue
 import sys
-sys.path.append('../queue_and_stack')
+sys.path.append('./queue_and_stack')
 
 
 class BinarySearchTree:
@@ -74,11 +74,16 @@ class BinarySearchTree:
 
         return current_val.value
 
+        # Recursive
+        # if self.right is None:
+        # return self. value
+        # else:
+        # return self.right.get_max()
+
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
 
     def for_each(self, cb):
-        # 1) Base case:
         cb(self.value)
 
         # left side recursive
@@ -95,22 +100,66 @@ class BinarySearchTree:
     # Hint:  Use a recursive, depth first traversal
 
     def in_order_print(self, node):
-        pass
+        # L, R, Root
+
+        # base case:
+        # node is None | node has no child nodes
+        if node is None:
+            return
+        # recursive case
+        # go left (as far as possible)
+        self.in_order_print(node.left)
+        print(node.value)
+        # go right (as far as possible)
+        self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
-        pass
+        # set up a QUEUE [nodes to backtrack to]
+        bft_q = Queue()
+        # init with 'node'
+        bft_q.enqueue(node)
+
+        # while queue is NOT empty
+        while bft_q.len() != 0:
+            # dequeue node
+            curr_node = bft_q.dequeue()
+            # print node.value
+            print(curr_node.value)
+            # enqueue node.left if exists, node.right if exists
+            if curr_node.left:
+                bft_q.enqueue(curr_node.left)
+            if curr_node.right:
+                bft_q.enqueue(curr_node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self, node):
-        pass
+        # create a STACK [nodes we need to backtrack to]
+        dft_s = Stack()
+        # init with 'node'
+        dft_s.push(node)
+
+        # while stack NOT empty
+        while dft_s.len() != 0:
+            # pop node from stack
+            curr_node = dft_s.pop()
+            # print node.value
+            print(curr_node.value)
+            # push node.left if exists, node.right if exists
+            if curr_node.left:
+                dft_s.push(curr_node.left)
+            if curr_node.right:
+                dft_s.push(curr_node.right)
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
+
     def pre_order_dft(self, node):
         pass
 
